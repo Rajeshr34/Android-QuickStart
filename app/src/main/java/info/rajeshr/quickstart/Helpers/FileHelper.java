@@ -17,9 +17,9 @@ public class FileHelper {
     }
 
     public static Boolean createFile(File file) {
-        createDir(file.getParentFile());
         if (file.exists())
             return true;
+        createDir(file.getParentFile());
         try {
             return file.createNewFile();
         } catch (IOException e) {

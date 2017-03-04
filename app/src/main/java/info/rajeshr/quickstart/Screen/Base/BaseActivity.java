@@ -6,10 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
 import info.rajeshr.quickstart.BaseApplication;
+import info.rajeshr.quickstart.Models.RetrofitNoInternetModel;
 import info.rajeshr.quickstart.Network.DownloadService;
 
 
@@ -63,5 +69,22 @@ public class BaseActivity extends AppCompatActivity {
 
     private void injectModule() {
         ((BaseApplication) getApplication()).getComponent().inject(this);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onRetrofitNoInternet(RetrofitNoInternetModel retrofitNoInternetModel) {
+        Toast.makeText(this, retrofitNoInternetModel.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

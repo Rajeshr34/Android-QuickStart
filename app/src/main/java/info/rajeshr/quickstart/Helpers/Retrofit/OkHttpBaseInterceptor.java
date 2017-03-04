@@ -3,11 +3,14 @@ package info.rajeshr.quickstart.Helpers.Retrofit;
 
 import android.content.Context;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 import info.rajeshr.quickstart.Helpers.Core.OkHttpStatic;
+import info.rajeshr.quickstart.Models.RetrofitNoInternetModel;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -31,7 +34,14 @@ public class OkHttpBaseInterceptor implements Interceptor {
 
         Request newRequest = request.newBuilder().header("token", OkHttpStatic.getToken(context)).build();
 
-        Response response = chain.proceed(newRequest);
+        Response response;
+        try {
+            response = chain.proceed(newRequest);
+        } catch (Exception e) {
+            EventBus.getDefault().postSticky(new RetrofitNoInternetModel(e.getMessage()));
+            throw e;
+        }
+
         ResponseBody responseBody = response.body();
         BufferedSource source = responseBody.source();
         source.request(Long.MAX_VALUE); // Buffer the entire body.
@@ -44,7 +54,6 @@ public class OkHttpBaseInterceptor implements Interceptor {
         } else {
             Timber.d("Response Type is binary");
         }
-
         return response;
     }
 

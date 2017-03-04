@@ -14,6 +14,7 @@ import info.rajeshr.quickstart.Modules.AppModule;
 import info.rajeshr.quickstart.Modules.ContextModule;
 import info.rajeshr.quickstart.Modules.RetrofitModule;
 import info.rajeshr.quickstart.Modules.ServiceModule;
+import io.paperdb.Paper;
 import timber.log.Timber;
 
 public class BaseApplication extends Application {
@@ -33,6 +34,11 @@ public class BaseApplication extends Application {
         initTimber();
         initComponent();
         initBigImageViewer();
+        initPaper();
+    }
+
+    private void initPaper() {
+        Paper.init(getApplicationContext());
     }
 
     private void initBigImageViewer() {
