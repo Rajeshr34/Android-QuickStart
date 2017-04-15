@@ -28,6 +28,26 @@ public class OkHttpBaseInterceptor implements Interceptor {
         this.context = context;
     }
 
+    static boolean isPlaintext(Buffer buffer) {
+        try {
+            Buffer prefix = new Buffer();
+            long byteCount = buffer.size() < 64 ? buffer.size() : 64;
+            buffer.copyTo(prefix, 0, byteCount);
+            for (int i = 0; i < 16; i++) {
+                if (prefix.exhausted()) {
+                    break;
+                }
+                int codePoint = prefix.readUtf8CodePoint();
+                if (Character.isISOControl(codePoint) && !Character.isWhitespace(codePoint)) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (EOFException e) {
+            return false; // Truncated UTF-8 sequence.
+        }
+    }
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
@@ -55,25 +75,5 @@ public class OkHttpBaseInterceptor implements Interceptor {
             Timber.d("Response Type is binary");
         }
         return response;
-    }
-
-    static boolean isPlaintext(Buffer buffer) {
-        try {
-            Buffer prefix = new Buffer();
-            long byteCount = buffer.size() < 64 ? buffer.size() : 64;
-            buffer.copyTo(prefix, 0, byteCount);
-            for (int i = 0; i < 16; i++) {
-                if (prefix.exhausted()) {
-                    break;
-                }
-                int codePoint = prefix.readUtf8CodePoint();
-                if (Character.isISOControl(codePoint) && !Character.isWhitespace(codePoint)) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (EOFException e) {
-            return false; // Truncated UTF-8 sequence.
-        }
     }
 }

@@ -9,7 +9,7 @@ public class TimberTree extends Timber.Tree {
 
     @Override
     protected void log(int priority, String tag, String message, Throwable t) {
-        if(priority == Log.ERROR) {
+        if (priority == Log.ERROR) {
             //Here Push Error to Fabric or any other Logger
         }
     }

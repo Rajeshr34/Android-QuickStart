@@ -14,14 +14,13 @@ import java.util.Locale;
 
 public class StringHelper {
 
-    protected StringHelper() {
-        // Empty
-    }
-
     public static final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
     public static final String NUMERIC = "0123456789";
     public static final String HEX = NUMERIC + ALPHA.substring(0, 6);
     public static final String ALPHA_NUMERIC = ALPHA + NUMERIC;
+    protected StringHelper() {
+        // Empty
+    }
 
     public static String camelCase(@NonNull final String[] strings) {
         String camelCase = "";
