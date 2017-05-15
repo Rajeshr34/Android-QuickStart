@@ -2,7 +2,6 @@ package info.rajeshr.quickstart.Libraries;
 
 
 import info.rajeshr.quickstart.Models.BaseConfigModel;
-import io.paperdb.Paper;
 
 public class StoreBook {
 
@@ -11,11 +10,11 @@ public class StoreBook {
 
     public static BaseConfigModel getConfigBook() {
         if (configModel == null)
-            configModel = Paper.book().read(BASE_CONFIG_MODEL, new BaseConfigModel());
+            configModel = PaperDB.read(BASE_CONFIG_MODEL, new BaseConfigModel());
         return configModel;
     }
 
     public static void saveConfigBook() {
-        Paper.book().write(BASE_CONFIG_MODEL, getConfigBook());
+        PaperDB.write(BASE_CONFIG_MODEL, getConfigBook());
     }
 }

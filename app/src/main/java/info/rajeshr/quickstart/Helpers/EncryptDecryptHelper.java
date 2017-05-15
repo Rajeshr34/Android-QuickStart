@@ -96,16 +96,7 @@ public class EncryptDecryptHelper {
                 }
             }
             return decrypted;
-        } catch (final InvalidKeyException e) {
-            Timber.wtf(e);
-            return null;
-        } catch (final InvalidAlgorithmParameterException e) {
-            Timber.wtf(e);
-            return null;
-        } catch (final IllegalBlockSizeException e) {
-            Timber.wtf(e);
-            return null;
-        } catch (final BadPaddingException e) {
+        } catch (final InvalidKeyException | BadPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
             Timber.wtf(e);
             return null;
         }

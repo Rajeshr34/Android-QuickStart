@@ -9,12 +9,12 @@ import com.github.piasy.biv.loader.glide.GlideImageLoader;
 import info.rajeshr.quickstart.Component.ApplicationComponent;
 import info.rajeshr.quickstart.Component.DaggerApplicationComponent;
 import info.rajeshr.quickstart.Helpers.Core.RetrofitStatic;
+import info.rajeshr.quickstart.Libraries.PaperDB;
 import info.rajeshr.quickstart.Models.OkHttpAuthModel;
 import info.rajeshr.quickstart.Modules.AppModule;
 import info.rajeshr.quickstart.Modules.ContextModule;
 import info.rajeshr.quickstart.Modules.RetrofitModule;
 import info.rajeshr.quickstart.Modules.ServiceModule;
-import io.paperdb.Paper;
 import timber.log.Timber;
 
 public class BaseApplication extends Application {
@@ -38,7 +38,7 @@ public class BaseApplication extends Application {
     }
 
     private void initPaper() {
-        Paper.init(getApplicationContext());
+        PaperDB.init(getApplicationContext());
     }
 
     private void initBigImageViewer() {
