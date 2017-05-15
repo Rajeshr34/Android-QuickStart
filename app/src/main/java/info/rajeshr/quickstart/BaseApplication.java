@@ -38,11 +38,11 @@ public class BaseApplication extends Application {
     }
 
     private void initPaper() {
-        PaperDB.init(getApplicationContext());
+        PaperDB.init(appComponent.getContext());
     }
 
     private void initBigImageViewer() {
-        BigImageViewer.initialize(GlideImageLoader.with(getApplicationContext()));
+        BigImageViewer.initialize(GlideImageLoader.with(appComponent.getContext()));
     }
 
     private void initComponent() {

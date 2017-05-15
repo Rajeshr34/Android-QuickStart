@@ -1,5 +1,7 @@
 package info.rajeshr.quickstart.Component;
 
+import android.content.Context;
+
 import dagger.Component;
 import info.rajeshr.quickstart.Modules.AppModule;
 import info.rajeshr.quickstart.Modules.ContextModule;
@@ -16,7 +18,10 @@ public interface ApplicationComponent {
 
     void inject(BaseActivity baseActivity);
 
+
     Retrofit getRetrofit();
+
+    Context getContext();
 
     DownloadService getDownloadService();
 

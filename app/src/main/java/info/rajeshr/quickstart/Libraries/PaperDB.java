@@ -22,7 +22,7 @@ public class PaperDB {
         return new File(context.getCacheDir(), "paperDb");
     }
 
-    public static File getFile(String key) {
+    private static File getFile(String key) {
         File fileCache = new File(getPaperDbFolder(), File.separator + "." + key);
         FileHelper.createFile(fileCache);
         return fileCache;
@@ -30,15 +30,15 @@ public class PaperDB {
 
     public static <T> T read(String key, Object defaultValue) {
         String readData = FileHelper.readFile(getFile(key));
-        T value;
+        Object value;
         try {
-            value = (T) new Gson().fromJson(readData, defaultValue.getClass());
+            value = new Gson().fromJson(readData, defaultValue.getClass());
         } catch (Exception ignored) {
-            value = (T) defaultValue;
+            value = defaultValue;
         }
         if (value == null)
-            value = (T) defaultValue;
-        return value;
+            value = defaultValue;
+        return (T) value;
     }
 
 
