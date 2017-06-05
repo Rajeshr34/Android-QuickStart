@@ -28,7 +28,7 @@ public class RetrofitHelper {
     public static String getString(ResponseBody body) {
         try {
             return body.string();
-        } catch (IOException e) {
+        } catch (Exception e) {
             Timber.e(e.getMessage());
         }
         return null;
