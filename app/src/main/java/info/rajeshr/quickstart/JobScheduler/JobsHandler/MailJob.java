@@ -1,4 +1,4 @@
-package info.rajeshr.quickstart.JobScheduler.Jobs;
+package info.rajeshr.quickstart.JobScheduler.JobsHandler;
 
 import android.content.Context;
 

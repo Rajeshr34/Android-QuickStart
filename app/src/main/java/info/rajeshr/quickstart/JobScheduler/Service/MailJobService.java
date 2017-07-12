@@ -5,7 +5,7 @@ import android.util.Log;
 import com.firebase.jobdispatcher.JobParameters;
 
 import info.rajeshr.quickstart.JobScheduler.Core.CoreJobService;
-import info.rajeshr.quickstart.JobScheduler.Jobs.MailJob;
+import info.rajeshr.quickstart.JobScheduler.JobsHandler.MailJob;
 
 
 public class MailJobService extends CoreJobService {

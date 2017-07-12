@@ -4,7 +4,7 @@ package info.rajeshr.quickstart.JobScheduler.Core;
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 
-import info.rajeshr.quickstart.JobScheduler.Jobs.MailJob;
+import info.rajeshr.quickstart.JobScheduler.JobsHandler.MailJob;
 
 /**
  * Created by Rajesh on 29/06/2017.
