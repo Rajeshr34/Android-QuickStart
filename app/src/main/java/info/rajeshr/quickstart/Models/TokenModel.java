@@ -5,5 +5,5 @@ package info.rajeshr.quickstart.Models;
  */
 
 public class TokenModel {
-    public String token;
+    public String token = "";
 }
