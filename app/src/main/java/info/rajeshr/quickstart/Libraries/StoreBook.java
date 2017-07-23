@@ -24,7 +24,7 @@ public class StoreBook {
 
     public static TokenModel getTokenBook() {
         if (tokenModel == null)
-            tokenModel = PaperDB.read(BASE_CONFIG_MODEL, new TokenModel());
+            tokenModel = PaperDB.read(TOKEN_MODEL, new TokenModel());
         return tokenModel;
     }
 
