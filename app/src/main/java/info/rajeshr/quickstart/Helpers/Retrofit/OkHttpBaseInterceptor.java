@@ -52,7 +52,7 @@ public class OkHttpBaseInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        Request newRequest = request.newBuilder().header("token", OkHttpStatic.getToken(context)).build();
+        Request newRequest = request.newBuilder().header("token", OkHttpStatic.getToken()).build();
 
         Response response;
         try {

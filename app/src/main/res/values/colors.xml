@@ -3,4 +3,17 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="mainBackground">#E1E2E1</color>
+
+
+    <color name="textColor">#737272</color>
+    <color name="textDarkColor">#53575e</color>
+
+    <color name="editTextColor">@color/textDarkColor</color>
+    <color name="editTextHintColor">@color/textColor</color>
+    <color name="editTextIdleLineColor">@color/textColor</color>
+    <color name="editTextSelectedLineColor">@color/colorPrimaryDark</color>
+    <color name="icon_color">@color/textColor</color>
+
 </resources>

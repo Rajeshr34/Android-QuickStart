@@ -3,6 +3,7 @@ package info.rajeshr.quickstart.Helpers.Core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import info.rajeshr.quickstart.Helpers.Retrofit.OkHttpBaseInterceptor;
 import info.rajeshr.quickstart.Helpers.Retrofit.OkHttpClientWithPool;
 import info.rajeshr.quickstart.Helpers.Retrofit.ProgressInterceptor;
 import info.rajeshr.quickstart.Helpers.Retrofit.ProgressListenerPool;
+import info.rajeshr.quickstart.Libraries.StoreBook;
 import info.rajeshr.quickstart.Models.OkHttpAuthModel;
 import okhttp3.Authenticator;
 import okhttp3.Cache;
@@ -31,7 +33,6 @@ public class OkHttpStatic {
 
     private static final int DISK_CACHE_SIZE = 10; //10 MB
     private static final int OK_HTTP_TIME_OUT = 30; //in Seconds
-    private static final String SHARED_TOKEN_KEY = "SHARED_TOKEN_KEY"; //in Seconds
 
 
     public static OkHttpClientWithPool getOkHttpClientWithPool(Context context, Cache cache, OkHttpAuthModel authModel) {
@@ -88,12 +89,11 @@ public class OkHttpStatic {
         }).setLevel(HttpLoggingInterceptor.Level.HEADERS);
     }
 
-    public static String getToken(Context context) {
-        return getSharedToken(context).getString(SHARED_TOKEN_KEY, "");
+    public static String getToken() {
+        return StoreBook.getTokenBook().token;
     }
 
     public static void saveToken(Context context, String data) {
-        SharedPreferences sharedPreferences = getSharedToken(context);
         String token = "";
         try {
             JSONObject json = new JSONObject(data);
@@ -101,11 +101,9 @@ public class OkHttpStatic {
         } catch (JSONException e) {
             Timber.tag("saveToken").e(e.getMessage());
         }
-        Timber.d(token);
-        sharedPreferences.edit().putString(SHARED_TOKEN_KEY, token).apply();
-    }
-
-    private static SharedPreferences getSharedToken(Context context) {
-        return context.getSharedPreferences(SHARED_TOKEN_KEY, Context.MODE_PRIVATE);
+        if (!TextUtils.isEmpty(token)) {
+            StoreBook.getTokenBook().token = token;
+            StoreBook.saveTokenBook();
+        }
     }
 }
