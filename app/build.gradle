@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 26
@@ -22,20 +21,26 @@ android {
             debuggable false
         }
         debug {
+            //minifyEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
         }
     }
-    splits {
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+  /*  splits {
         abi {
             enable true
             reset()
             include 'x86', 'armeabi',  'x86_64','armeabi-v7a', 'mips'
             universalApk false
         }
-    }
+    }*/
 }
 
-// map for the version code
+/*// map for the version code
 ext.versionCodes = ['armeabi': 1, 'armeabi-v7a': 2, 'arm64-v8a': 3, 'mips': 5, 'mips64': 6, 'x86': 8, 'x86_64': 9]
 
 android.applicationVariants.all { variant ->
@@ -44,7 +49,7 @@ android.applicationVariants.all { variant ->
         output.versionCodeOverride =
                 project.ext.versionCodes.get(output.getFilter(com.android.build.OutputFile.ABI), 0) * 1000000 + android.defaultConfig.versionCode
     }
-}
+}*/
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
